@@ -1,33 +1,45 @@
 var C;
 var ctx;
+var bounding;
+var bgcolor = "#0d0d0d";
 window.onload = function() {
     C = document.getElementById("bg");
     ctx = C.getContext("2d");
+    bounding = C.getBoundingClientRect()
     clear(ctx);
+    $('body').css({
+        'background-image':"url(" + C.toDataURL("image/png")+ ");",
+        'background-repeat':"no-repeat;",
+        'background-size':"cover;"
+    });
 }
 
-window.onmousedown = function(e) {
-    var bounding = C.getBoundingClientRect();
-    var x = e.clientX - bounding.left;
-    var y = e.clientY - bounding.top;
+window.onmousemove = function(e) {
     clear(ctx);
-    ctx.linewidth = 20;
-    ctx.strokeStyle = "white";
-    var i = 0;
-    var ivl = setInterval(() => {
-        ctx.beginPath();
-        ctx.arc(x, y, i, 0, 2*Math.PI);
-        ctx.stroke();
-        ctx.fillStyle = "rgba(6, 6, 6, 0.5)";
-        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        i++;
-    }, 10);
-    setTimeout(() => {
-        clearInterval(ivl);
-    }, 5000);
-};
+
+    var scaleX = C.width / bounding.width;
+    var scaleY = C.height / bounding.height;
+    var x = ((e.clientX - bounding.left) / (bounding.right - bounding.left) * C.width) / scaleX;
+    var y = ((e.clientY - bounding.top) / (bounding.bottom - bounding.top) * C.height) / scaleY;
+
+    // Create gradient
+    var grd = ctx.createRadialGradient(x, y, 5, x, y, 200);
+    grd.addColorStop(0, "white");
+    grd.addColorStop(0.4, "#676767");
+    grd.addColorStop(0.9, "#141414");
+    grd.addColorStop(1, bgcolor);
+
+    // Fill with gradient
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.arc(x, y, 200, 0, 2 * Math.PI);
+    ctx.fill();
+    $('body').css({'background-image':"url(" + C.toDataURL("image/png")+ ")" });
+}
 
 function clear(ctx) {
-    ctx.fillStyle = "#060606";
+    ctx.canvas.width = window.innerWidth;
+    ctx.canvas.height = window.innerHeight;
+    ctx.fillStyle = bgcolor;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }

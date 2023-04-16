@@ -5,7 +5,7 @@
   }
   
   :root {
-    --background: #141414;
+    --background: #060606;
     --color: #FFFFFF;
   }
   
@@ -19,21 +19,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background: url("../neurons.png"), #141414; */
+    overflow: hidden;
   }
 
   canvas {
+    width: 100%;
     position: absolute;
-    z-index: -2;
+    top: 0;
     left: 0;
+    z-index: -2;
   }
 
   img {
     position: absolute;
     z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
   }
 
   .container {
