@@ -1,7 +1,7 @@
 var C;
 var ctx;
 var bounding;
-var bgcolor = "#0d0d0d";
+var bgcolor = "#080808";
 window.onload = function() {
     C = document.getElementById("bg");
     ctx = C.getContext("2d");
@@ -12,6 +12,8 @@ window.onload = function() {
         'background-repeat':"no-repeat;",
         'background-size':"cover;"
     });
+    $('.container').addClass('top');
+    $('#main').css({"opacity":1})
 }
 
 window.onmousemove = function(e) {
@@ -23,16 +25,16 @@ window.onmousemove = function(e) {
     var y = ((e.clientY - bounding.top) / (bounding.bottom - bounding.top) * C.height) / scaleY;
 
     // Create gradient
-    var grd = ctx.createRadialGradient(x, y, 5, x, y, 200);
+    var grd = ctx.createRadialGradient(x, y, 5, x, y, 1000);
     grd.addColorStop(0, "white");
-    grd.addColorStop(0.4, "#676767");
-    grd.addColorStop(0.9, "#141414");
+    grd.addColorStop(0.1, "#676767");
+    // grd.addColorStop(0.6, "#141414");
     grd.addColorStop(1, bgcolor);
 
     // Fill with gradient
     ctx.fillStyle = grd;
     ctx.beginPath();
-    ctx.arc(x, y, 200, 0, 2 * Math.PI);
+    ctx.arc(x, y, 1000, 0, 2 * Math.PI);
     ctx.fill();
     $('body').css({'background-image':"url(" + C.toDataURL("image/png")+ ")" });
 }
