@@ -13,7 +13,7 @@ function setupTypewriter(t) {
         tag = "",
         writingTag = false,
         tagOpen = false,
-        typeDelay = 100, // 100
+        typeDelay = 0, // 100
         tempTypeDelay = 0;
 
     let type = function() {
@@ -77,27 +77,37 @@ function setupTypewriter(t) {
 }
 
 const info = {
-    skills: '\n\t\t<span class="main">Languages: [</span><span class="string-highlight">"Python", "C", "C#", "TypeScript" "JavaScript",' + 
-        '\n\t\t"HTML", "CSS", "Java", "Swift", "MySQL"</span><span class="main">],' +
+    skills: '<div class="dropdown"><span class="main">\t\tLanguages: [</span><span class="string-highlight">"Python", "C", "C#", "TypeScript" "JavaScript",' + 
+        '\n\t\t\t"HTML", "CSS", "Java", "Swift", "MySQL"</span><span class="main">],' +
         '\n\t\tTools: [</span><span class="string-highlight">"React Native", "React.JS", "Angular/Ionic"' +
-        '\n\t\t"AWS", "Azure", "Google Cloud", "Agile & Scrum Development"</span>' +
-        '\n\t\t<span class="main">]</span>',
-    emission : '\n\t\t\t<span class="prop-highlight">"MLH Tigerhacks' +
+        '\n\t\t\t"AWS", "Azure", "Google Cloud", "Agile & Scrum Development"</span>' +
+        '<span class="main">]</span></div>\t\t',
+    emission : '<div class="dropdown"><span class="prop-highlight">\t\t\t"MLH Tigerhacks' +
         '\n\t\t\tFirst Place Winner",</span>' +
         '\n\t\t\t<span class="prop-highlight">"Tracks C02 Emissions' +
         '\n\t\t\tfrom personal driving"</span>' + 
-        '\n\t\t\t<span><a href="https://github.com/jamesctipton/JASK" target="_blank">Github Link</a></span>\n\t\t\t',
+        '\n\t\t\t<span><a href="https://github.com/jamesctipton/JASK" target="_blank">Github Link</a></span></div>\t\t\t',
     
 }
 
 function expand(elem) {
     const span = document.getElementById(elem);
     if(span.innerHTML != "ⓘ") {
-        span.innerHTML = "ⓘ";
-        document.getElementById("hint").innerHTML = "// click ⓘ to expand"
+        span.firstChild.style.maxHeight = "0";
+        setTimeout(function() {
+            span.innerHTML = "ⓘ";
+            document.getElementById("hint").innerHTML = "// click ⓘ to expand"
+        }, 800);
     } else {
         span.innerHTML = info[elem];
         document.getElementById("hint").innerHTML = "// click again to contract"
+
+        const dropdown = span.firstChild;
+
+        dropdown.style.maxHeight = "0";
+        setTimeout(function() {
+            dropdown.style.maxHeight = "1000px";
+        }, 0);
     }
 }
 

@@ -74,10 +74,9 @@
   }
 
   .dropdown {
-    display: block;
-    height: 0;
+    max-height: 0;
     overflow: hidden;
-    transition: all 500ms;
+    transition: max-height 800ms ease;
   }
 
   #lightdark {
