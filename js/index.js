@@ -91,9 +91,11 @@ const info = {
 }
 
 function expand(elem) {
+    // get element that called the function
     const span = document.getElementById(elem);
     if(span.innerHTML != "ⓘ") {
         span.firstChild.style.maxHeight = "0";
+        // async needed to delay html change in time for css
         setTimeout(function() {
             span.innerHTML = "ⓘ";
             document.getElementById("hint").innerHTML = "// click ⓘ to expand"
@@ -129,9 +131,11 @@ function lightDark() {
 
 $(document).ready(function() {
 
+    // detect browser dark/light state
     (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? darkmode() : lightmode();
     (sessionStorage.getItem("darkmode") == true) ? darkmode() : lightmode();
     
+    // start typewriter
     const elem = document.getElementById('typewriter');
 
     let typewriter = setupTypewriter(elem);
