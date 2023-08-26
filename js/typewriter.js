@@ -1,16 +1,22 @@
+import { finishTyping } from "./index.js";
+
 export default class Typewriter {
 
     constructor(doc, self) {
-        this.typeDelay = 100;   // constant value
+        // this.typeDelay = [10, 10, 15, 15, 15, 20, 20, 20, 20, 50, 50, 70, 85, 100]; // array of possible typing delays 
+        this.typeDelay = 0;
         this.tempTypeDelay = 0; // will change based on text
         this.doc = doc;         // the html Document object
         this.self = self;       // the typewriter <pre> element
-
-        this.intervalID = 0;
     }
 
     isWhiteSpace(ch) {
         return ((ch == ' ') || (ch == '\t') || (ch == '\n'));
+    }
+
+    // select a random element from a given array
+    randomChoice(arr) {
+        return arr[Math.floor(arr.length * Math.random())];
     }
 
     // chunk of characters to be appended to the page's HTML
@@ -52,7 +58,8 @@ export default class Typewriter {
                 if(this.isWhiteSpace(text[i])) {
                     this.tempTypeDelay = 0;
                 } else {
-                    this.tempTypeDelay = Math.random() * this.typeDelay;
+                    // change typing speed semi randomly to emulate human typing speed
+                    this.tempTypeDelay = this.randomChoice(this.typeDelay);
                 }
 
                 this.self.innerHTML += text[i];
@@ -60,7 +67,7 @@ export default class Typewriter {
 
             // this clause controls what happens when the end of a tag is reached. It will then add a new span element to the DOM
             if(this.currentlyWritingTag && text[i] === ">") {
-                this.tempTypeDelay = Math.random() * this.typeDelay;
+                this.tempTypeDelay = this.randomChoice(this.typeDelay);
                 this.currentlyWritingTag = false;
 
                 if(this.htmlTagOpen) {
@@ -83,12 +90,17 @@ export default class Typewriter {
 
         // delete current html so its not rendered.
         this.self.innerHTML = "";
+        var genVal = undefined;
         
-        const recursiveType = () => {
-            typingGenerator.next();
-
-            if (!typingGenerator.done) {
+        const recursiveType = async () => {
+            genVal = typingGenerator.next();
+            if (!genVal.done) {
                 setTimeout(recursiveType, this.tempTypeDelay);
+            }
+            else {
+                // generator finishes
+                // call index.js function to render info divs and enable pointer events
+                finishTyping();
             }
         };
 

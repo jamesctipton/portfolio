@@ -4,40 +4,38 @@ let sunIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -9
 let moonIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q8 0 17 .5t23 1.5q-36 32-56 79t-20 99q0 90 63 153t153 63q52 0 99-18.5t79-51.5q1 12 1.5 19.5t.5 14.5q0 150-105 255T480-120Zm0-60q109 0 190-67.5T771-406q-25 11-53.667 16.5Q688.667-384 660-384q-114.689 0-195.345-80.655Q384-545.311 384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Zm-4-297Z"/></svg>';
 
 const info = {
-    skills: '<div class="dropdown"><span class="main">\t\tLanguages: [</span><span class="string-highlight">"Python", "C", "C#", "TypeScript" "JavaScript",' + 
-        '\n\t\t\t"HTML", "CSS", "Java", "Swift", "MySQL"</span><span class="main">],' +
-        '\n\t\tTools: [</span><span class="string-highlight">"React Native", "React.JS", "Angular/Ionic"' +
-        '\n\t\t\t"AWS", "Azure", "Google Cloud", "Agile & Scrum Development"</span>' +
-        '<span class="main">]</span></div>\t\t',
-    emission : '<div class="dropdown"><span class="prop-highlight">\t\t\t"MLH Tigerhacks' +
-        '\n\t\t\tFirst Place Winner",</span>' +
-        '\n\t\t\t<span class="prop-highlight">"Tracks C02 Emissions' +
-        '\n\t\t\tfrom personal driving"</span>' + 
-        '\n\t\t\t<span><a href="https://github.com/jamesctipton/JASK" target="_blank">Github Link</a></span></div>\t\t\t',
+    emission : 'test test test test test test test test test',
+    oilSpill : '<div class="dropdown">\t\t\t▲<span class="prop-highlight">"MLH Tigerhacks' +
+    '\n\t\t\tFirst Place Winner",</span>' +
+    '\n\t\t\t<span class="prop-highlight">"Tracks C02 Emissions' +
+    '\n\t\t\tfrom personal driving"</span>' + 
+    '\n\t\t\t<span><a href="https://github.com/jamesctipton/JASK" target="_blank">Github Link</a></span></div>\t\t\t',
+    fri : '',
+    depression : '',
+    portfolio : '',
+    pong : ''
     
 }
 
+// similar to insertBefore DOM function, just inserts after a sibling node
+function insertAfter(referenceNode, newNode) {
+    return referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
 // global function
-window.expand = function(elem) {
+window.expandInfo = function(elem) {
     // get element that called the function
-    const span = document.getElementById(elem);
-    if(span.innerHTML != "ⓘ") {
-        span.firstChild.style.maxHeight = "0";
-        // async needed to delay html change in time for css
-        setTimeout(function() {
-            span.innerHTML = "ⓘ";
-            document.getElementById("hint").innerHTML = "// click ⓘ to expand"
-        }, 800);
+    let span = document.getElementById(elem);
+    // let infoDiv = span.parentNode.lastChild;
+    // infoDiv.classList.toggle("collapsed");
+    // infoDiv.classList.toggle("expanded");
+    $('#'+ elem + '-info').slideToggle();
+    if(span.innerHTML != "▼") {
+        span.innerHTML = "▼"
+        document.getElementById("hint").innerHTML = "// click ▼ to expand"
     } else {
-        span.innerHTML = info[elem];
-        document.getElementById("hint").innerHTML = "// click again to contract"
-
-        const dropdown = span.firstChild;
-
-        dropdown.style.maxHeight = "0";
-        setTimeout(function() {
-            dropdown.style.maxHeight = "1000px";
-        }, 0);
+        span.innerHTML = "▲"
+        document.getElementById("hint").innerHTML = "// click ▲ to contract"
     }
 }
 
@@ -55,7 +53,7 @@ function lightmode() {
 
 // called via onclick
 // global function
-window.lightDark = function(event) {
+window.lightDark = function() {
     (document.documentElement.getAttribute('data-theme') == 'dark') ? darkmode() : lightmode();
 }
 
@@ -65,6 +63,8 @@ $(document).ready(function() {
     (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? darkmode() : lightmode();
     (sessionStorage.getItem("darkmode") == true) ? darkmode() : lightmode();
     
+    document.body.style.pointerEvents = "none";
+
     // start typewriter
     const elem = document.getElementById('typewriter');
 
@@ -72,3 +72,31 @@ $(document).ready(function() {
 
     typewriter.typePage();
 });
+
+// called by the typePage function upon completion
+export function finishTyping() {
+    document.body.style.pointerEvents = "auto";
+
+    // info divs for projects are long, so it'd slow down the typing generator if they were written on the html page
+    // this will create and insert the info divs dynamically
+    for(let i=0; i < Object.keys(info).length; i++) {
+        let elem = Object.keys(info)[i];
+
+        let span = document.getElementById(elem);
+        let newDiv = document.createElement("div");
+        // insert after next sibling
+        insertAfter(span.parentNode.nextSibling, newDiv);
+
+        // span.parentNode.classList.add("info-container");
+
+        newDiv.id = elem + "-info";
+        newDiv.classList.add("project-info");
+        // newDiv.classList.add("collapsed");
+
+        newDiv.innerHTML = info[elem];
+    }
+
+    // span.parentNode.removeChild(span.parentNode.lastChild);
+
+}
+

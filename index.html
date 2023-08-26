@@ -17,14 +17,19 @@
         name: <span class="string-highlight">'James Tipton'</span>,
         type: <span class="string-highlight">'Full Stack'</span>,
         location: <span class="string-highlight">'United States'</span>,
-        <span id="hint" class="comment">// click ⓘ to expand</span>
-        skills: [{<span id="skills" class="comment info" onclick="expand(this.id)">ⓘ</span>}</span>],
-        projects: {<span class="name-highlight">E-mission: </span>{<span id="emission" class="comment info" onclick="expand(this.id)">ⓘ</span>},
-                    <span class="name-highlight">Oil Spill Assessment</span>,
-                    <span class="name-highlight">Vacation Planner App</span>,
-                    <span class="name-highlight">Depression Prediction ML Model</span>,
-                    <span class="name-highlight">Portfolio</span>,
-                    <span class="name-highlight">PONG</span>
+        skills: [{<span id="skills" class="comment"></span>
+          <span id="languages" class="main">Languages: [</span><span class="string-highlight preserve-whitespace">"Python", "C", "C#", "TypeScript", "JavaScript", "HTML", "CSS", "Java", "Swift", "MySQL"</span>
+                    ],
+          <span id="tools" class="main">Tools: [</span><span class="string-highlight preserve-whitespace">"React Native", "React.JS", "Angular/Ionic", "AWS", "Azure", "Google Cloud", "Agile and Scrum Development"</span>
+                  ]
+          }],
+        <span id="hint" class="comment">// click ▼ to expand</span>
+        projects: {<span class="name-highlight">E-mission: </span>{<span id="emission" class="comment info" onclick="expandInfo(this.id)">▼</span>},
+                   <span class="name-highlight">Oil Spill Assessment</span>{<span id="oilSpill" class="comment info" onclick="expandInfo(this.id)">▼</span>},
+                   <span class="name-highlight">Vacation Planner App</span>{<span id="fri" class="comment info" onclick="expandInfo(this.id)">▼</span>},
+                   <span class="name-highlight">Depression Prediction ML Model</span>{<span id="depression" class="comment info" onclick="expandInfo(this.id)">▼</span>},
+                   <span class="name-highlight">Portfolio</span>{<span id="portfolio" class="comment info" onclick="expandInfo(this.id)">▼</span>},
+                   <span class="name-highlight">PONG</span>{<span id="pong" class="comment info" onclick="expandInfo(this.id)">▼</span>}
         };
     }; </pre>
 

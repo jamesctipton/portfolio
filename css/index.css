@@ -65,18 +65,9 @@
 
   .info {
     cursor: pointer;
-    overflow: hidden;
-    transition: all 100ms ease;
   }
   .info:hover {
     color: var(--string);
-    border-radius: 100%;
-  }
-
-  .dropdown {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 800ms ease;
   }
 
   #lightdark {
@@ -90,16 +81,37 @@
   }
 
   #typewriter {
-      font-size: 2em;
-      margin: 0;
-      line-height: 40px;
-      font-family: "Menlo", "Monaco", 'Courier New', monospace;
+    font-size: 2em;
+    margin: 0;
+    line-height: 40px;
+    font-family: "Menlo", "Monaco", 'Courier New', monospace;
   }
   #typewriter:after {
-        content: "|";
-        animation: blink 500ms linear infinite alternate;
-      }
+    content: "|";
+    animation: blink 500ms linear infinite alternate;
+  }
+
+  #languages, #tools {
+    vertical-align: top;
+  }
   
+  #typewriter .preserve-whitespace {
+    width: 60%;
+    display: inline-block;
+    white-space: pre-wrap;
+  }
+
+  .project-info {
+    border: 1px solid darkcyan;
+    color: var(--prop);
+    display: none;
+    margin-top: -40px;
+    width: 80%;
+  }
+  .project-info::after {
+    content: '\0a0';
+  }
+
   @-webkit-keyframes blink{
     0%{opacity: 0;}
     100%{opacity: 1;}
