@@ -80,6 +80,15 @@
     fill: var(--main);
   }
 
+  /* needed to indent the tools and languages wrapped text */
+  /* #pushbox {
+    border: 1px solid red;
+    position: float;
+    height: 10em;
+    width: 12em;
+    margin-top: 15em;
+  } */
+
   #typewriter {
     font-size: 2em;
     margin: 0;
@@ -97,19 +106,28 @@
   
   #typewriter .preserve-whitespace {
     width: 60%;
-    display: inline-block;
+    /* display: inline-block; */
     white-space: pre-wrap;
   }
 
   .project-info {
     border: 1px solid darkcyan;
     color: var(--prop);
-    display: none;
-    margin-top: -40px;
-    width: 80%;
+    /* display: none; */
+    /* margin-top: -40px; */
+    transition: all 1s ease;
+    width: 21em;
+    white-space: pre-wrap;
+    padding: 4px;
   }
-  .project-info::after {
-    content: '\0a0';
+  .collapsed {
+    height: 0;
+    display: none;
+  }
+  .expanded {
+    height: auto;
+    display: inline-block;
+    overflow: wrap;
   }
 
   @-webkit-keyframes blink{

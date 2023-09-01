@@ -4,12 +4,8 @@ let sunIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -9
 let moonIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q8 0 17 .5t23 1.5q-36 32-56 79t-20 99q0 90 63 153t153 63q52 0 99-18.5t79-51.5q1 12 1.5 19.5t.5 14.5q0 150-105 255T480-120Zm0-60q109 0 190-67.5T771-406q-25 11-53.667 16.5Q688.667-384 660-384q-114.689 0-195.345-80.655Q384-545.311 384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Zm-4-297Z"/></svg>';
 
 const info = {
-    emission : 'test test test test test test test test test',
-    oilSpill : '<div class="dropdown">\t\t\t▲<span class="prop-highlight">"MLH Tigerhacks' +
-    '\n\t\t\tFirst Place Winner",</span>' +
-    '\n\t\t\t<span class="prop-highlight">"Tracks C02 Emissions' +
-    '\n\t\t\tfrom personal driving"</span>' + 
-    '\n\t\t\t<span><a href="https://github.com/jamesctipton/JASK" target="_blank">Github Link</a></span></div>\t\t\t',
+    emission : 'First Place Winner at MLH Tigerhacks 2022. I collaborated with 3 colleagues to write a React Native mobile app that tracks CO2 emissions while driving. I worked primarily on the frontend. <span><a href="https://github.com/jamesctipton/JASK" target="_blank">Github Link</a></span>',
+    oilSpill : '',
     fri : '',
     depression : '',
     portfolio : '',
@@ -26,16 +22,23 @@ function insertAfter(referenceNode, newNode) {
 window.expandInfo = function(elem) {
     // get element that called the function
     let span = document.getElementById(elem);
-    // let infoDiv = span.parentNode.lastChild;
-    // infoDiv.classList.toggle("collapsed");
-    // infoDiv.classList.toggle("expanded");
-    $('#'+ elem + '-info').slideToggle();
+    let infoDiv = document.getElementById(elem + "-info");
+    infoDiv.classList.toggle("collapsed");
+    infoDiv.classList.toggle("expanded");
+    // $('#'+ elem + '-info').slideToggle();
     if(span.innerHTML != "▼") {
         span.innerHTML = "▼"
         document.getElementById("hint").innerHTML = "// click ▼ to expand"
+        infoDiv.parentNode.removeChild(infoDiv.nextSibling);
+        infoDiv.parentNode.removeChild(infoDiv.nextSibling);
     } else {
         span.innerHTML = "▲"
         document.getElementById("hint").innerHTML = "// click ▲ to contract"
+        var lineBreak = document.createElement("br");
+        var indentAfter = document.createElement("span");
+        indentAfter.innerHTML = "                   ";
+        insertAfter(infoDiv, lineBreak);
+        insertAfter(lineBreak, indentAfter);
     }
 }
 
@@ -73,10 +76,7 @@ $(document).ready(function() {
     typewriter.typePage();
 });
 
-// called by the typePage function upon completion
-export function finishTyping() {
-    document.body.style.pointerEvents = "auto";
-
+function insertInfoDivs() {
     // info divs for projects are long, so it'd slow down the typing generator if they were written on the html page
     // this will create and insert the info divs dynamically
     for(let i=0; i < Object.keys(info).length; i++) {
@@ -91,12 +91,15 @@ export function finishTyping() {
 
         newDiv.id = elem + "-info";
         newDiv.classList.add("project-info");
-        // newDiv.classList.add("collapsed");
+        newDiv.classList.add("collapsed");
 
         newDiv.innerHTML = info[elem];
     }
+}
 
-    // span.parentNode.removeChild(span.parentNode.lastChild);
-
+// called by the typePage function upon completion
+export function finishTyping() {
+    document.body.style.pointerEvents = "auto";
+    insertInfoDivs();
 }
 
