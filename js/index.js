@@ -4,12 +4,12 @@ let sunIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -9
 let moonIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q8 0 17 .5t23 1.5q-36 32-56 79t-20 99q0 90 63 153t153 63q52 0 99-18.5t79-51.5q1 12 1.5 19.5t.5 14.5q0 150-105 255T480-120Zm0-60q109 0 190-67.5T771-406q-25 11-53.667 16.5Q688.667-384 660-384q-114.689 0-195.345-80.655Q384-545.311 384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Zm-4-297Z"/></svg>';
 
 const info = {
-    emission : 'First Place Winner at MLH Tigerhacks 2022. I collaborated with 3 colleagues to write a React Native mobile app that tracks CO2 emissions while driving. I worked primarily on the frontend. <span><a href="https://github.com/jamesctipton/JASK" target="_blank">Github Link</a></span>',
-    oilSpill : '',
-    fri : '',
-    depression : '',
-    portfolio : '',
-    pong : ''
+    emission : 'First Place Winner at MLH Tigerhacks 2022. I collaborated with 3 colleagues to write a React Native mobile app that tracks CO₂ emissions, average fuel economy, speed, and location of your car in real-time. <span><a href="https://github.com/jamesctipton/JASK" target="_blank">Github Link</a></span>',
+    oilSpill : 'A research project in conjunction with the US Geological Survey to create a new way to detect oil content in water using a mobile phone. I worked on creating an Angular/Ionic web application to display and handle data, as well as employ a machine learning model to predict oil content from a photo. <span><a href="https://github.com/jamesctipton/WOD" target="_blank">Github Link</a></span>',
+    fri : "My senior capstone project in Computer Science. Frí is a vacation planning app that I and 3 fellow students constructed in ReactJS with a Python Flask server backend. The app's main focus is to streamline group vacation planning and aggregate live data relevant to planning a trip. <span><a href='https://github.com/jamesctipton/capstone' target='_blank'>Github Link</a></span>",
+    depression : 'A school project that used Python and various libraries to create a natural language model to predict depressive features in various text datasets from social media. <span><a href="https://github.com/jamesctipton/MLFinal" target="_blank">Github Link</a></span>',
+    portfolio : "You're looking at it! This is a website I constructed using plain HTML, CSS, and JavaScript. Though most of my expertise is in JavaScript and TypeScript frameworks, I felt it was important to make everything in this portfolio from the ground up." + '<span><a href="https://github.com/jamesctipton/portfolio" target="_blank">Github Link</a></span>',
+    pong : 'My first delve into using GUI libraries with Python, and my first bigger project. This was early in my education in Computer Science and I learned a lot about object oriented and functional programming. <span><a href="https://github.com/jamesctipton/pong" target="_blank">Github Link</a></span>'
     
 }
 
@@ -29,14 +29,18 @@ window.expandInfo = function(elem) {
     if(span.innerHTML != "▼") {
         span.innerHTML = "▼"
         document.getElementById("hint").innerHTML = "// click ▼ to expand"
+        
+        // remove whitespace and indents
         infoDiv.parentNode.removeChild(infoDiv.nextSibling);
         infoDiv.parentNode.removeChild(infoDiv.nextSibling);
     } else {
         span.innerHTML = "▲"
         document.getElementById("hint").innerHTML = "// click ▲ to contract"
+        
+        // preserve whitespace with indents
         var lineBreak = document.createElement("br");
         var indentAfter = document.createElement("span");
-        indentAfter.innerHTML = "                   ";
+        indentAfter.innerHTML = "        ";
         insertAfter(infoDiv, lineBreak);
         insertAfter(lineBreak, indentAfter);
     }
@@ -102,4 +106,3 @@ export function finishTyping() {
     document.body.style.pointerEvents = "auto";
     insertInfoDivs();
 }
-

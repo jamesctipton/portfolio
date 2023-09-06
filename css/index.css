@@ -81,13 +81,13 @@
   }
 
   /* needed to indent the tools and languages wrapped text */
-  /* #pushbox {
-    border: 1px solid red;
+  #pushbox {
+    /* border: 1px solid red; */
     position: float;
     height: 10em;
     width: 12em;
     margin-top: 15em;
-  } */
+  }
 
   #typewriter {
     font-size: 2em;
@@ -115,19 +115,21 @@
     color: var(--prop);
     /* display: none; */
     /* margin-top: -40px; */
-    transition: all 1s ease;
+    transition: max-height 1s linear;
     width: 21em;
     white-space: pre-wrap;
     padding: 4px;
+    overflow: hidden;
   }
   .collapsed {
-    height: 0;
+    max-height: 0;
+    transition: max-height 1s linear;
     display: none;
   }
   .expanded {
-    height: auto;
+    max-height: 10000px;
+    transition: max-height 1s linear;
     display: inline-block;
-    overflow: wrap;
   }
 
   @-webkit-keyframes blink{

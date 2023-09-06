@@ -3,8 +3,8 @@ import { finishTyping } from "./index.js";
 export default class Typewriter {
 
     constructor(doc, self) {
-        // this.typeDelay = [10, 10, 15, 15, 15, 20, 20, 20, 20, 50, 50, 70, 85, 100]; // array of possible typing delays 
-        this.typeDelay = 0;
+        this.typeDelay = [10, 10, 15, 15, 15, 20, 20, 20, 20, 50]; // array of possible typing delays 
+        // this.typeDelay = 0;
         this.tempTypeDelay = 0; // will change based on text
         this.doc = doc;         // the html Document object
         this.self = self;       // the typewriter <pre> element
