@@ -4,11 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>James Tipton</title>
 
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script type="module" src="./js/index.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDWpZC_Uhp_wLI3k6Lrv1K57e6JPLqxgGg",
+        authDomain: "portfolio1-7fbd2.firebaseapp.com",
+        projectId: "portfolio1-7fbd2",
+        storageBucket: "portfolio1-7fbd2.appspot.com",
+        messagingSenderId: "947023056458",
+        appId: "1:947023056458:web:d96439e650f9844c5220b3",
+        measurementId: "G-HCB9HM05ZE"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
 </head>
 <body>
   <div id="lightdark" onclick="lightDark()"><svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q8 0 17 .5t23 1.5q-36 32-56 79t-20 99q0 90 63 153t153 63q52 0 99-18.5t79-51.5q1 12 1.5 19.5t.5 14.5q0 150-105 255T480-120Zm0-60q109 0 190-67.5T771-406q-25 11-53.667 16.5Q688.667-384 660-384q-114.689 0-195.345-80.655Q384-545.311 384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Zm-4-297Z"/></svg></div>
@@ -36,7 +60,9 @@
       },
       contact: {
         email: <a class="name-highlight" href="mailto: jamesc.tipton@gmail.com?subject=Hello!">jamesc.tipton@gmail.com</a>,
-        resume: <a class="name-highlight" href="./assets/Resume.pdf" download>Download</a>
+        resume: <a class="name-highlight" href="./assets/Resume.pdf" download>Download</a>,
+        github: <a class="name-highlight" href="https://www.github.com/jamesctipton" target="_blank">Repositories</a>,
+        linkedIn: <a class="name-highlight" href="https://www.linkedin.com/in/james-tipton-35940720b/" target="_blank">Profile</a>,
       }
   }; </pre>
 

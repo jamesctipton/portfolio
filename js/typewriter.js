@@ -92,8 +92,13 @@ export default class Typewriter {
         this.self.innerHTML = "";
         var genVal = undefined;
         
-        const recursiveType = async () => {
+        const recursiveType = () => {
+            
+            //auto scroll animation
+            this.doc.body.scrollIntoView({ behavior: "instant", block: "end" });
+
             genVal = typingGenerator.next();
+            
             if (!genVal.done) {
                 setTimeout(recursiveType, this.tempTypeDelay);
             }

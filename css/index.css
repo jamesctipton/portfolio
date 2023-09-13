@@ -35,13 +35,27 @@
   html, body {
     background-color: var(--bg);
     color: var(--main);
-    height: 100%;
+    height: fit-content;
     font-family: "rubik", "Arial";
   }
   
   body {
     display: flex;
     justify-content: left;
+    visibility: hidden;
+    font-size: 2em;
+    line-height: 40px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    body {
+      font-size: 1em;
+      line-height: 20px;
+    }
+
+    svg {
+      transform: scale(0.8);
+    }
   }
 
   .accent-highlight {
@@ -90,9 +104,7 @@
   }
 
   #typewriter {
-    font-size: 2em;
     margin: 0;
-    line-height: 40px;
     font-family: "Menlo", "Monaco", 'Courier New', monospace;
   }
   #typewriter:after {

@@ -70,6 +70,7 @@ $(document).ready(function() {
     (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? darkmode() : lightmode();
     (sessionStorage.getItem("darkmode") == true) ? darkmode() : lightmode();
     
+    // clicking on dropdowns gets weird while the animation is going
     document.body.style.pointerEvents = "none";
 
     // start typewriter
@@ -78,6 +79,9 @@ $(document).ready(function() {
     let typewriter = new Typewriter(document, elem);
 
     typewriter.typePage();
+
+    // the original html document flashes briefly before the animation without this tag and the corresponding visibility css
+    document.body.style.visibility = "visible";
 });
 
 function insertInfoDivs() {
