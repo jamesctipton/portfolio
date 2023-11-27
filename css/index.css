@@ -18,7 +18,7 @@
   }
 
   [data-theme="dark"] {
-    --bg: rgba(5, 17, 18, 1);
+    --bg: rgb(5, 19, 20);
     --accent: rgba(221, 79, 39, 1);
     --main: rgba(164, 190, 193, 1);
     --string: rgba(65, 232, 149, 1);
@@ -35,7 +35,6 @@
   html, body {
     background-color: var(--bg);
     color: var(--main);
-    height: fit-content;
     font-family: "rubik", "Arial";
   }
   
@@ -45,6 +44,7 @@
     visibility: hidden;
     font-size: 2em;
     line-height: 40px;
+    height: fit-content;
   }
 
   @media only screen and (max-width: 500px) {
@@ -106,6 +106,7 @@
   #typewriter {
     margin: 0;
     font-family: "Menlo", "Monaco", 'Courier New', monospace;
+    height: fit-content;
   }
   #typewriter:after {
     content: "|";

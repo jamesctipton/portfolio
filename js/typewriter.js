@@ -91,11 +91,17 @@ export default class Typewriter {
         // delete current html so its not rendered.
         this.self.innerHTML = "";
         var genVal = undefined;
+
+        // create an Observer instance
+        const resizeObserver = new ResizeObserver(e => 
+            // auto scroll animation
+            this.doc.getElementById("typewriter").scrollIntoView({ behavior: "instant", block: "end" })
+        );
+        
+        // start observing a DOM node
+        resizeObserver.observe(document.body);
         
         const recursiveType = () => {
-            
-            //auto scroll animation
-            this.doc.body.scrollIntoView({ behavior: "instant", block: "end" });
 
             genVal = typingGenerator.next();
             
