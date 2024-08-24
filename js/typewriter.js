@@ -98,7 +98,7 @@ export default class Typewriter {
             this.doc.getElementById("typewriter").scrollIntoView({ behavior: "instant", block: "end" })
         );
         
-        // start observing a DOM node
+        // start observing size changes of body DOM node
         resizeObserver.observe(document.body);
         
         const recursiveType = () => {
@@ -110,6 +110,8 @@ export default class Typewriter {
             }
             else {
                 // generator finishes
+                // stop ResizeObserver so changing the size of the body element doesn't autoscroll
+                resizeObserver.disconnect();
                 // call index.js function to render info divs and enable pointer events
                 finishTyping();
             }
