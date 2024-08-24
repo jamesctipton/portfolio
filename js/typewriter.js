@@ -8,6 +8,7 @@ export default class Typewriter {
         this.tempTypeDelay = 0; // will change based on text
         this.doc = doc;         // the html Document object
         this.self = self;       // the typewriter <pre> element
+        this.skipped = false    // boolean for if animation is skipped
     }
 
     isWhiteSpace(ch) {
@@ -88,6 +89,8 @@ export default class Typewriter {
         
         const typingGenerator = this.typeChar(this.self.innerHTML);
 
+        // preserve innerHTML in case animation is skipped
+        let preserve = this.self.innerHTML;
         // delete current html so its not rendered.
         this.self.innerHTML = "";
         var genVal = undefined;
@@ -101,11 +104,20 @@ export default class Typewriter {
         // start observing size changes of body DOM node
         resizeObserver.observe(document.body);
         
+        // skip typing animation on first time pressing enter
+        let x = this;
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                x.self.innerHTML = preserve;
+                x.skipped = true;
+            }
+        }, { once: true });
+
         const recursiveType = () => {
 
             genVal = typingGenerator.next();
-            
-            if (!genVal.done) {
+
+            if (!genVal.done && !this.skipped) {
                 setTimeout(recursiveType, this.tempTypeDelay);
             }
             else {
